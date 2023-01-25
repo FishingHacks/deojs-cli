@@ -1,0 +1,12 @@
+import { Controller, Get, Query, Inject } from 'deojs';
+import { RootService } from './root.service';
+
+@Controller('/')
+export class RootController {
+  constructor(@Inject(RootService) private rootService: RootService) {}
+
+  @Get('/')
+  getName(@Query('name') name?: string) {
+    return this.rootService.helloWorld(name);
+  }
+}
