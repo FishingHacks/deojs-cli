@@ -35,7 +35,7 @@ deojs-cli <command> [options]
 ### **Schematics available**
 
 | <span style="color: #d97176;">Name</span>       | <span style="color: #d97176;">Alias</span>      | <span style="color: #d97176;">Description</span> |
-| ----------------------------------------------- | ----------------------------------------------- | ------------------------------------------------ |
+| :---------------------------------------------- | :---------------------------------------------- | :----------------------------------------------- |
 | <span style="color:#18bc74;">module</span>      | <span style="color:#367dd8;">mod</span>         | Generate a new Module                            |
 | <span style="color:#18bc74;">service</span>     | <span style="color:#367dd8;">s</span>           | Generate a new Service                           |
 | <span style="color:#18bc74;">controller</span>  | <span style="color:#367dd8;">co</span>          | Generate a new Controller                        |
