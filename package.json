@@ -1,18 +1,25 @@
 {
-  "name": "deojs-cli",
-  "version": "1.0.0",
-  "description": "",
-  "bin": "bin/index.js",
-  "scripts": {
-    "build": "tsc && node post-setup.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@types/inquirer": "^9.0.3",
-    "@types/node": "^18.11.18",
-    "chalk": "^4",
-    "inquirer": "^9.0.3"
-  }
+    "name": "@fishinghacks/deojs-cli",
+    "version": "1.0.0",
+    "description": "",
+    "bin": "bin/index.js",
+    "scripts": {
+        "build": "tsc && node post-setup.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@types/inquirer": "^9.0.3",
+        "@types/node": "^18.11.18",
+        "chalk": "^4",
+        "inquirer": "^9.0.3"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/FishingHacks/deojs-cli"
+    },
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com"
+    }
 }
