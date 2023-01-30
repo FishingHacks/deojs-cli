@@ -13,7 +13,7 @@ import {
 import { format } from 'util';
 import { version } from './package.json';
 import { join } from 'path';
-import { spawnSync } from 'child_process';
+import { spawn, spawnSync } from 'child_process';
 import { existsSync, readdirSync } from 'fs';
 
 function printHelp() {
@@ -195,15 +195,59 @@ export async function main() {
                 else options.directory ||= process.cwd();
                 if (id === 'generateApplication') {
                     generateApplication(options.directory, required.name);
+                    try {
+                        console.log(chalk.blue('Installing packages...'));
+                        const proc = spawnSync('pnpm i', {
+                            shell: true,
+                            cwd: join(options.directory, required.name),
+                        });
+                        if (proc.error || proc.status !== 0) throw new Error();
+                        console.log(
+                            chalk.green('Successfully installed all packages!')
+                        );
+                    } catch {
+                        console.log(
+                            chalk.red('Error: Failed to install packages!')
+                        );
+                    }
+                    console.log(
+                        chalk.green('  Successfully initiated a new project!')
+                    );
+                    console.log(
+                        chalk.green('  Use ') +
+                            chalk.blue('cd ' + required.name) +
+                            chalk.green(' to get to the project directory.')
+                    );
+                    console.log(
+                        chalk.green('  Use ') +
+                            chalk.blue('pnpm start') +
+                            chalk.green(' to start your project.\n')
+                    );
                 } else if (id === 'build') {
                     runTSCInFolder(options.directory);
                 } else if (id === 'start') {
-                    const cwd = join(runTSCInFolder(options.directory), 'src');
+                    const cwd = join(
+                        runTSCInFolder(options.directory),
+                        'dist/src'
+                    );
                     let mainFiles = [
                         join(cwd, 'index.js'),
                         join(cwd, 'main.js'),
                     ];
-                    spawnSync('node', [resolveFilePaths(mainFiles)], { cwd });
+                    const a = spawn('node', [resolveFilePaths(mainFiles)], {
+                        cwd,
+                    });
+                    a.stderr.pipe(process.stderr);
+                    a.stdout.pipe(process.stdout);
+                    a.stdin.pipe(process.stdin);
+                    a.on('close', process.exit);
+                    a.on('disconnect', process.exit);
+                    a.on('exit', process.exit);
+                    a.on('error', (e) => {
+                        console.log(e);
+                        process.exit(1);
+                    });
+                    return;
                 } else if (id === 'generate') {
                     const directory = options.directory;
                     const name = required.name;
@@ -230,6 +274,8 @@ export async function main() {
                             })),
                             { bottom: 0, left: 5, top: 2 }
                         );
+                    } else {
+                        generateFunction(directory, name);
                     }
                 } else if (id === 'info') {
                     const npm_v = tryRun('npm', '-v');

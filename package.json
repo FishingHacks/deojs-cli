@@ -1,7 +1,7 @@
 {
     "name": "@fishinghacks/deojs-cli",
-    "version": "1.0.0",
-    "description": "",
+    "version": "1.0.3",
+    "description": "Command Line Interface for DeoJS",
     "bin": "bin/index.js",
     "scripts": {
         "build": "tsc && node post-setup.js"

@@ -15,7 +15,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "deojs": "^1.0.1",
+        "deojs": "^1.1.0",
         "reflect-metadata": "^0.1.13"
     },
     "devDependencies": {
@@ -31,7 +31,7 @@
         "prettier": "^2.8.3",
         "ts-jest": "^29.0.5",
         "typescript": "^4.9.4",
-        "deojs-cli": "^1.0.0"
+        "deojs-cli": "^1.0.3"
     },
     "jest": {
         "moduleFileExtensions": [
